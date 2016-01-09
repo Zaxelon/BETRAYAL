@@ -1,0 +1,82 @@
+object Form1: TForm1
+  Left = 560
+  Height = 600
+  Top = 240
+  Width = 800
+  BorderStyle = bsDialog
+  Caption = 'Pinball'
+  ClientHeight = 600
+  ClientWidth = 800
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
+  Position = poDesktopCenter
+  LCLVersion = '1.4.4.0'
+  object Shape1: TShape
+    Left = 752
+    Height = 10
+    Top = 0
+    Width = 10
+    Brush.Color = clLime
+    Pen.Color = clBlue
+    Shape = stCircle
+  end
+  object PaintBox2: TPaintBox
+    Left = 0
+    Height = 600
+    Top = 0
+    Width = 400
+    OnPaint = PaintBox2Paint
+  end
+  object Label1: TLabel
+    Left = 546
+    Height = 37
+    Top = 8
+    Width = 78
+    Caption = 'Score :'
+    Font.Color = clFuchsia
+    Font.Height = -27
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 546
+    Height = 37
+    Top = 56
+    Width = 15
+    Caption = '0'
+    Font.Color = clFuchsia
+    Font.Height = -27
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 544
+    Height = 37
+    Top = 104
+    Width = 134
+    Caption = 'Best Score :'
+    Font.Color = clFuchsia
+    Font.Height = -27
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label4: TLabel
+    Left = 544
+    Height = 37
+    Top = 152
+    Width = 15
+    Caption = '0'
+    Font.Color = clFuchsia
+    Font.Height = -27
+    ParentColor = False
+    ParentFont = False
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = Timer1Timer
+    left = 772
+  end
+end
