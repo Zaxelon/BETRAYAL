@@ -6,8 +6,8 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, Math, IntfGraphics, Menus;
+  Classes, SysUtils, FileUtil, Forms, Controls, Graphics,
+  Dialogs, ExtCtrls, StdCtrls, Math, IntfGraphics, Menus;
 
 type
 {****t* Engine/TBall
