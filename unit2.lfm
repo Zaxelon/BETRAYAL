@@ -1,0 +1,71 @@
+object Form2: TForm2
+  Left = 560
+  Height = 180
+  Top = 392
+  Width = 227
+  BorderStyle = bsDialog
+  Caption = 'Form2'
+  ClientHeight = 180
+  ClientWidth = 227
+  Position = poOwnerFormCenter
+  LCLVersion = '1.4.4.0'
+  object StringGrid1: TStringGrid
+    Left = 0
+    Height = 131
+    Top = 48
+    Width = 227
+    BorderStyle = bsNone
+    Color = clWhite
+    ColCount = 3
+    DefaultColWidth = 100
+    Enabled = False
+    FixedColor = clInactiveBorder
+    ParentBiDiMode = False
+    RowCount = 7
+    ScrollBars = ssNone
+    TabOrder = 0
+    ColWidths = (
+      27
+      100
+      100
+    )
+    Cells = (
+      8
+      0
+      0
+      ' №'
+      0
+      1
+      ' 1'
+      0
+      2
+      ' 2'
+      0
+      3
+      ' 3'
+      0
+      4
+      ' 4'
+      0
+      5
+      ' 5'
+      1
+      0
+      'Игрок'
+      2
+      0
+      'Счет'
+    )
+  end
+  object Label1: TLabel
+    Left = 48
+    Height = 37
+    Top = 0
+    Width = 134
+    Caption = 'Best Score :'
+    Font.Color = clRed
+    Font.Height = -27
+    ParentColor = False
+    ParentFont = False
+  end
+end

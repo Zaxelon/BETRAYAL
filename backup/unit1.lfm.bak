@@ -1,12 +1,12 @@
 object Form1: TForm1
-  Left = 151
+  Left = 100
   Height = 600
-  Top = 175
+  Top = 101
   Width = 800
   BorderStyle = bsDialog
   Caption = 'Pinball'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 600
+  ClientWidth = 800
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -35,7 +35,7 @@ object Form1: TForm1
     Top = 8
     Width = 78
     Caption = 'Score :'
-    Font.Color = clFuchsia
+    Font.Color = clRed
     Font.Height = -27
     ParentColor = False
     ParentFont = False
@@ -46,32 +46,34 @@ object Form1: TForm1
     Top = 56
     Width = 15
     Caption = '0'
-    Font.Color = clFuchsia
+    Font.Color = clRed
     Font.Height = -27
     ParentColor = False
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 544
+    Left = 496
     Height = 37
-    Top = 104
-    Width = 134
-    Caption = 'Best Score :'
-    Font.Color = clFuchsia
+    Top = 112
+    Width = 200
+    Caption = 'Show Best Score '
+    Font.Color = clRed
     Font.Height = -27
     ParentColor = False
     ParentFont = False
+    OnClick = Label3Click
   end
   object Label4: TLabel
-    Left = 544
+    Left = 488
     Height = 37
-    Top = 152
-    Width = 15
-    Caption = '0'
-    Font.Color = clFuchsia
+    Top = 536
+    Width = 218
+    Caption = 'Show Your Scars!!!'
+    Font.Color = clNone
     Font.Height = -27
     ParentColor = False
     ParentFont = False
+    Visible = False
   end
   object Timer1: TTimer
     Enabled = False
