@@ -7,16 +7,44 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics,
-  Dialogs, ExtCtrls, StdCtrls, Math, IntfGraphics;
+  Dialogs, ExtCtrls, StdCtrls, Math, IntfGraphics, Menus;
 
 type
-
+{****t* TBall
+* NAME
+* TBall
+* USAGE
+* Объект описывающий шар
+* INPUTS
+* координаты центра шара
+* x, y: extended;
+* текущее изменения координат
+* dx, dy: extended;
+* SYNOPSIS
+* :TBall
+* EXAMPLE
+* exemple:TBall;
+ ****}
   TBall = record
     x, y: extended; //координаты центра шара
     dx, dy: extended; // текущее изменения координат
     r, d: float; //radius,diameter
   end;
-
+  {****t* TLine
+  * NAME
+  * TLine
+  * USAGE
+  * Объект описывающий линию
+  * INPUTS
+  * координаты  концов  линии
+  *  x1, y1, x2, y2: longint;
+  * очки заработанные за  столкновение с  этой линией.
+  * score: integer;
+  * SYNOPSIS
+  * :TLine
+  * EXAMPLE
+  * exemple:TLine;
+   ****}
   TLine = record
     x1, y1, x2, y2: longint;    //координаты  концов  линии
     power: extended; //энергия  которую  передаем  шару  при столкновении
@@ -26,6 +54,16 @@ type
 
   { TForm1 }
 
+  {****t* TForm1
+  * NAME
+  * TForm1
+  * USAGE
+  * Объект описывающий всю форму
+  * SYNOPSIS
+  * :TForm1
+  * EXAMPLE
+  * exemple:TForm1;
+   ****}
   TForm1 = class(TForm)
     Label1: TLabel;
     Label2: TLabel;
@@ -75,8 +113,19 @@ implementation
 { TForm1 }
 const
   Grav_acel = 0.002181;
-  Friction = 0.9998;
 
+{****p* TForm1.Timer1Timer
+* NAME
+* TForm1.Timer1Timer
+* USAGE
+* Процедура таймера
+* INPUTS
+* Sender: TObject;
+* SYNOPSIS
+*  TForm1.Timer1Timer(Sender: TObject);
+* EXAMPLE
+*  Timer1Timer(self);
+****}
 procedure TForm1.Timer1Timer(Sender: TObject);
 begin
   RollBall;
@@ -84,6 +133,19 @@ begin
   right_bitok;
 end;
 
+{****p* TForm1.AddLine
+* NAME
+* TForm1.AddLine
+* USAGE
+* Процедура добавления линии
+* INPUTS
+* счет, сила, угол, точки начала и конца линии.
+* (scr, power, ugol, x1, y1, x2, y2: longint);
+* SYNOPSIS
+*  TForm1.AddLine(scr, power, ugol, x1, y1, x2, y2: longint);
+* EXAMPLE
+*  AddLine(0,0,0,0,0,1,1);
+ ****}
 procedure TForm1.AddLine(scr, power, ugol, x1, y1, x2, y2: longint);
 begin
   Inc(CountLine);
@@ -96,6 +158,16 @@ begin
   Lines[CountLine].ugol := ugol;
 end;
 
+{****p* TForm1.RollBall
+* NAME
+* TForm1.RollBall
+* USAGE
+* Процедура перемешения шара
+* SYNOPSIS
+*  TForm1.RollBall;
+* EXAMPLE
+*  RollBall;
+ ****}
 procedure TForm1.RollBall;
 var
   i: integer;
@@ -111,10 +183,19 @@ begin
     Shape1.Top := round(sh_data.y);
     Shape1.Left := round(sh_data.x);
   end;
-  sh_data.dx := sh_data.dx * Friction;
-  sh_data.dy := sh_data.dy * Friction + Grav_acel;
+  sh_data.dy := sh_data.dy + Grav_acel;
 end;
 
+{****p* TForm1.DrawTable
+* NAME
+* TForm1.DrawTable
+* USAGE
+* Процедура прорисовки стола
+* SYNOPSIS
+*  TForm1.DrawTable;
+* EXAMPLE
+*  DrawTable;
+ ****}
 procedure TForm1.DrawTable;
 var
   i: integer;
@@ -129,6 +210,16 @@ begin
   end;
 end;
 
+{****p* TForm1.Init
+* NAME
+* TForm1.Init
+* USAGE
+* Процедура инициализации
+* SYNOPSIS
+*  TForm1.Init;
+* EXAMPLE
+*  Init;
+ ****}
 procedure TForm1.Init;
 begin
   score := 0;
@@ -140,19 +231,19 @@ begin
   lf_dx := 0;
   rg_dx := 0;
 
-  addline(500, 666, 0, 145, 570, 175, 580);
-  addline(500, 666, 0, 205, 580, 235, 570);
+  addline(500, 666, 0, 135, 571, 165, 580);
+  addline(500, 666, 0, 215, 580, 245, 571);
 
   addline(0, -1, 0, 378, 580, 400, 580);
-  addline(-10000, -100, 0, 0, 598, 398, 598);
+  addline(0, -1, 0, 0, 598, 398, 598);
 
   addline(100, 0, 0, 0, 2, 400, 2);
   addline(100, 0, 0, 398, 0, 398, 600);
   addline(100, 0, 0, 2, 0, 2, 600);
 
-  addline(100, 0, 0, 377, 100, 377, 600);
-  addline(100, 0, 0, 0, 540, 145, 570);
-  addline(100, 0, 0, 235, 570, 376, 540);
+  addline(100, 0, 0, 377, 65, 377, 600);
+  addline(100, 0, 0, 0, 540, 132, 570);
+  addline(100, 0, 0, 248, 570, 376, 540);
 
   addline(100, 0, 0, 275, 490, 320, 470);
   addline(100, 0, 0, 320, 470, 320, 420);
@@ -162,11 +253,11 @@ begin
   addline(100, 0, 0, 60, 470, 60, 420);
   addline(250, 100, 0, 105, 490, 60, 420);
 
-  addline(100, 0, 0, 275, 515, 345, 483);
-  addline(100, 0, 0, 345, 483, 345, 410);
+  //addline(100, 0, 0, 275, 515, 345, 483);
+  //addline(100, 0, 0, 345, 483, 345, 410);
 
-  addline(100, 0, 0, 105, 515, 35, 483);
-  addline(100, 0, 0, 35, 483, 35, 410);
+  //addline(100, 0, 0, 105, 515, 35, 483);
+  //addline(100, 0, 0, 35, 483, 35, 410);
 
   addline(100, 0, 0, 400, 60, 375, 30);
   addline(100, 0, 0, 375, 30, 325, 0);
@@ -174,10 +265,23 @@ begin
   addline(100, 0, 0, 0, 60, 25, 30);
   addline(100, 0, 0, 25, 30, 75, 0);
 
-  sh_data.x := 384;
-  sh_data.y := 563;
+  sh_data.x := 383;
+  sh_data.y := 567;
 end;
 
+{****p* TForm1.ColorOfPowe
+* NAME
+* TForm1.ColorOfPowe
+* USAGE
+* Процедура для определения цвета линии
+* INPUTS
+* Номер линии.
+* i: integer;
+* SYNOPSIS
+*  TForm1.ColorOfPowe(i: integer);
+* EXAMPLE
+*  ColorOfPowe(5);
+ ****}
 procedure TForm1.ColorOfPowe(i: integer);
 begin
   with PaintBox2.canvas do
@@ -205,9 +309,19 @@ begin
   end;
 end;
 
+{****p* TForm1.left_bitok
+* NAME
+* TForm1.left_bitok
+* USAGE
+* Процедура управления левым битком
+* SYNOPSIS
+*  TForm1.left_bitok;
+* EXAMPLE
+*  left_bitok;
+ ****}
 procedure TForm1.left_bitok;
 begin
-  lf_dx := lf_dx + 1;
+  lf_dx := lf_dx + 0.5;
   lf_bt := lf_bt + lf_dx;
   if lf_bt > 30 then
   begin
@@ -227,9 +341,19 @@ begin
   PaintBox2.canvas.Line(Lines[0].x1, Lines[0].y1, Lines[0].x2, Lines[0].y2);
 end;
 
+{****p* TForm1.right_bitok
+* NAME
+* TForm1.right_bitok
+* USAGE
+* Процедура управления левым битком
+* SYNOPSIS
+*  TForm1.right_bitok;
+* EXAMPLE
+*  right_bitok;
+ ****}
 procedure TForm1.right_bitok;
 begin
-  rg_dx := rg_dx - 1;
+  rg_dx := rg_dx - 0.5;
   rg_bt := rg_bt + rg_dx;
   if rg_bt > 205 then
   begin
@@ -249,6 +373,19 @@ begin
   PaintBox2.canvas.Line(Lines[1].x1, Lines[1].y1, Lines[1].x2, Lines[1].y2);
 end;
 
+{****p* TForm1.Interceptor
+* NAME
+* TForm1.Interceptor
+* USAGE
+* Процедура упругого отскока
+* INPUTS
+* Номер линии.
+* n: integer;
+* SYNOPSIS
+*  TForm1.Interceptor(n: integer);
+* EXAMPLE
+*  Interceptor(4);
+ ****}
 procedure TForm1.Interceptor(n: integer);
 var
   a, b, y, c: extended;
@@ -277,7 +414,11 @@ begin
     if Lines[n].power = 666 then
       c := (Sqrt(Sqr(Sh_data.dx) + sqr(Sh_data.dy))) * 1.2;
     sh_data.dx := c * cos(y * pi / 180);  //высчитываем  приращения  для  движения
+    if (sh_data.dx>-0.1) and (sh_data.dx<0) then sh_data.dx:= -0.1;
+    if (sh_data.dx<0.1) and (sh_data.dx>0) then sh_data.dx:= 0.1;
     sh_data.dy := c * sin(y * pi / 180);
+    if (sh_data.dy>-0.1) and (sh_data.dy<0) then sh_data.dy:= -0.1;
+    if (sh_data.dy<0.1) and (sh_data.dy>0) then sh_data.dy:= 0.1;
     sh_data.x := sh_data.x + sh_data.dx;  //и сразу  двигаем  шар
     sh_data.y := sh_data.y + sh_data.dy;
     shape1.Top := round(sh_data.y);
@@ -285,12 +426,26 @@ begin
   end;
 end;
 
+{****f* TForm1.InterceptorCircleLine
+* NAME
+* TForm1.InterceptorCircleLine
+* USAGE
+* Процедура для проверки пересечения линии
+* INPUTS
+* centerx, centery: extended; координаты центра шара
+* radius :extended; радиус
+* p1x, p1y, p2x, p2y: extended; координаты начала и конца линии
+* SYNOPSIS
+*  TForm1.InterceptorCircleLine(centerx, centery, radius, p1x, p1y, p2x, p2y: extended): boolean;
+* EXAMPLE
+* InterceptorCircleLine(0,0,0,0,0,0,0);
+ ****}
 function TForm1.InterceptorCircleLine(centerx, centery, radius, p1x,
   p1y, p2x, p2y: extended): boolean;
 var
   dx, dy, a, b, c, x01, x02, y01, y02: extended;
 begin
-  //radius := radius * 1.1;
+  radius :=radius*1.1;
   x01 := p1x - centerx;
   y01 := p1y - centery;
   x02 := p2x - centerx;
@@ -311,16 +466,52 @@ begin
     Result := (a + b + c < 0);
 end;
 
+{****f* TForm1.GetAngle
+* NAME
+* TForm1.GetAngle
+* USAGE
+* Процедура для получения угла относительно горизонтали
+* INPUTS
+* x1, y1, x2, y2: single; координаты начала и конца линии
+* SYNOPSIS
+*  TForm1.GetAngle(x1, y1, x2, y2: single): single;
+* EXAMPLE
+*  GetAngle(0,0,0,0);
+ ****}
 function TForm1.GetAngle(x1, y1, x2, y2: single): single;
 begin
   GetAngle := (ArcTan2(y2 - y1, x2 - x1)) * 180 / pi;
 end;
 
+{****f* TForm1.SizeTwoDot
+* NAME
+* TForm1.SizeTwoDot
+* USAGE
+* Процедура для получения длины линии
+* INPUTS
+* x1, y1, x2, y2: extended; координаты начала и конца линии
+* SYNOPSIS
+*  TForm1.SizeTwoDot(x1, y1, x2, y2: extended): real;
+* EXAMPLE
+*  SizeTwoDot(0,0,0,0);
+ ****}
 function TForm1.SizeTwoDot(x1, y1, x2, y2: extended): real;
 begin
   Result := Sqrt(sqr(x1 - x2) + sqr(y1 - y2));
 end;
 
+{****p* TForm1.FormCreate
+* NAME
+* TForm1.FormCreate
+* USAGE
+* Процедура создания формы
+* INPUTS
+* Sender: TObject;
+* SYNOPSIS
+*  TForm1.FormCreate(Sender: TObject);
+* EXAMPLE
+*  FormCreate(self);
+ ****}
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   sh_data.d := Shape1.Width;
@@ -336,6 +527,19 @@ begin
   Paintbox2.Canvas.Brush.Bitmap.LoadFromIntfImage(img);
 end;
 
+{****p* TForm1.FormCloseQuery
+* NAME
+* TForm1.FormCloseQuery
+* USAGE
+* Процедура быстрого закрытия программы
+* INPUTS
+* Sender: TObject;
+* CanClose: boolean; можем закрыть или нет
+* SYNOPSIS
+*  TForm1.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+* EXAMPLE
+*  FormCloseQuery(self,true);
+ ****}
 procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
   Timer1.Enabled := False;
@@ -345,11 +549,36 @@ begin
     Timer1.Enabled := True;
 end;
 
+{****p* TForm1.FormDestroy
+* NAME
+* TForm1.FormDestroy
+* USAGE
+* Процедура закрытия программы
+* INPUTS
+* Sender: TObject;
+* SYNOPSIS
+*  TForm1.FormDestroy(Sender: TObject);
+* EXAMPLE
+*  FormDestroy(self);
+ ****}
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
   Brush.Bitmap.Destroy;
 end;
 
+{****p* TForm1.FormKeyDown
+* NAME
+* TForm1.FormKeyDown
+* USAGE
+* Процедура перехвата нажатия клавиш
+* INPUTS
+* Sender: TObject;
+* Key: word; номер нажатой кнопки
+* SYNOPSIS
+*  TForm1.FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
+* EXAMPLE
+*  FormKeyDown(self,13,bt,ssShift);
+ ****}
 procedure TForm1.FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
   if key = 32 then //start(space)
@@ -363,11 +592,11 @@ begin
   end;
   if key = 37 then //left bitok
   begin
-    lf_dx := lf_dx - 15;
+    lf_dx := lf_dx - 10;
   end;
   if key = 39 then //right bitok
   begin
-    rg_dx := rg_dx + 15;
+    rg_dx := rg_dx + 10;
   end;
   if key = 27 then //exit (esc)
   begin
@@ -375,6 +604,18 @@ begin
   end;
 end;
 
+{****p* TForm1.PaintBox2Paint
+* NAME
+* TForm1.PaintBox2Paint
+* USAGE
+* Процедура рисовки стола при обновлении канвы
+* INPUTS
+* Sender: TObject;
+* SYNOPSIS
+*  TForm1.PaintBox2Paint(Sender: TObject);
+* EXAMPLE
+*  PaintBox2Paint(self);
+ ****}
 procedure TForm1.PaintBox2Paint(Sender: TObject);
 begin
   DrawTable;

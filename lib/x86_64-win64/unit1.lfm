@@ -1,12 +1,12 @@
 object Form1: TForm1
-  Left = 560
+  Left = 151
   Height = 600
-  Top = 240
+  Top = 175
   Width = 800
   BorderStyle = bsDialog
   Caption = 'Pinball'
-  ClientHeight = 600
-  ClientWidth = 800
+  ClientHeight = 0
+  ClientWidth = 0
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
