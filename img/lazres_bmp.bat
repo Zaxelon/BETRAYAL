@@ -1,1 +1,0 @@
-lazres back_ground.lrs back.bmp

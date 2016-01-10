@@ -10,9 +10,9 @@ uses
   Dialogs, ExtCtrls, StdCtrls, Math, IntfGraphics, Menus;
 
 type
-{****t* TBall
+{****t* Engine/TBall
 * NAME
-* TBall
+* TBallag
 * USAGE
 * Объект описывающий шар
 * INPUTS
@@ -25,12 +25,13 @@ type
 * EXAMPLE
 * exemple:TBall;
  ****}
+ 
   TBall = record
     x, y: extended; //координаты центра шара
     dx, dy: extended; // текущее изменения координат
     r, d: float; //radius,diameter
   end;
-  {****t* TLine
+  {****t* Engine/TLine
   * NAME
   * TLine
   * USAGE
@@ -54,7 +55,7 @@ type
 
   { TForm1 }
 
-  {****t* TForm1
+  {****t* Engine/TForm1
   * NAME
   * TForm1
   * USAGE
@@ -114,7 +115,7 @@ implementation
 const
   Grav_acel = 0.002181;
 
-{****p* TForm1.Timer1Timer
+{****p* logic/TForm1.Timer1Timer
 * NAME
 * TForm1.Timer1Timer
 * USAGE
@@ -133,7 +134,7 @@ begin
   right_bitok;
 end;
 
-{****p* TForm1.AddLine
+{****p* logic/TForm1.AddLine
 * NAME
 * TForm1.AddLine
 * USAGE
@@ -158,7 +159,7 @@ begin
   Lines[CountLine].ugol := ugol;
 end;
 
-{****p* TForm1.RollBall
+{****p* logic/TForm1.RollBall
 * NAME
 * TForm1.RollBall
 * USAGE
@@ -186,7 +187,7 @@ begin
   sh_data.dy := sh_data.dy + Grav_acel;
 end;
 
-{****p* TForm1.DrawTable
+{****p* graph/TForm1.DrawTable
 * NAME
 * TForm1.DrawTable
 * USAGE
@@ -210,7 +211,7 @@ begin
   end;
 end;
 
-{****p* TForm1.Init
+{****p* logic/TForm1.Init
 * NAME
 * TForm1.Init
 * USAGE
@@ -269,7 +270,7 @@ begin
   sh_data.y := 567;
 end;
 
-{****p* TForm1.ColorOfPowe
+{****p* graph/TForm1.ColorOfPowe
 * NAME
 * TForm1.ColorOfPowe
 * USAGE
@@ -309,7 +310,7 @@ begin
   end;
 end;
 
-{****p* TForm1.left_bitok
+{****p* graph/TForm1.left_bitok
 * NAME
 * TForm1.left_bitok
 * USAGE
@@ -341,7 +342,7 @@ begin
   PaintBox2.canvas.Line(Lines[0].x1, Lines[0].y1, Lines[0].x2, Lines[0].y2);
 end;
 
-{****p* TForm1.right_bitok
+{****p* graph/TForm1.right_bitok
 * NAME
 * TForm1.right_bitok
 * USAGE
@@ -373,7 +374,7 @@ begin
   PaintBox2.canvas.Line(Lines[1].x1, Lines[1].y1, Lines[1].x2, Lines[1].y2);
 end;
 
-{****p* TForm1.Interceptor
+{****p* logic/TForm1.Interceptor
 * NAME
 * TForm1.Interceptor
 * USAGE
@@ -430,7 +431,7 @@ begin
   end;
 end;
 
-{****f* TForm1.InterceptorCircleLine
+{****f* logic/TForm1.InterceptorCircleLine
 * NAME
 * TForm1.InterceptorCircleLine
 * USAGE
@@ -470,7 +471,7 @@ begin
     Result := (a + b + c < 0);
 end;
 
-{****f* TForm1.GetAngle
+{****f* logic/TForm1.GetAngle
 * NAME
 * TForm1.GetAngle
 * USAGE
@@ -487,7 +488,7 @@ begin
   GetAngle := (ArcTan2(y2 - y1, x2 - x1)) * 180 / pi;
 end;
 
-{****f* TForm1.SizeTwoDot
+{****f* logic/TForm1.SizeTwoDot
 * NAME
 * TForm1.SizeTwoDot
 * USAGE
@@ -504,7 +505,7 @@ begin
   Result := Sqrt(sqr(x1 - x2) + sqr(y1 - y2));
 end;
 
-{****p* TForm1.FormCreate
+{****p* graph/TForm1.FormCreate
 * NAME
 * TForm1.FormCreate
 * USAGE
@@ -531,7 +532,7 @@ begin
   Paintbox2.Canvas.Brush.Bitmap.LoadFromIntfImage(img);
 end;
 
-{****p* TForm1.FormCloseQuery
+{****p* logic/TForm1.FormCloseQuery
 * NAME
 * TForm1.FormCloseQuery
 * USAGE
@@ -553,7 +554,7 @@ begin
     Timer1.Enabled := True;
 end;
 
-{****p* TForm1.FormDestroy
+{****p* logic/TForm1.FormDestroy
 * NAME
 * TForm1.FormDestroy
 * USAGE
@@ -570,7 +571,7 @@ begin
   Brush.Bitmap.Destroy;
 end;
 
-{****p* TForm1.FormKeyDown
+{****p* logic/TForm1.FormKeyDown
 * NAME
 * TForm1.FormKeyDown
 * USAGE
@@ -608,7 +609,7 @@ begin
   end;
 end;
 
-{****p* TForm1.PaintBox2Paint
+{****p* graph/TForm1.PaintBox2Paint
 * NAME
 * TForm1.PaintBox2Paint
 * USAGE
