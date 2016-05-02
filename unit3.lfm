@@ -1,0 +1,10 @@
+object Slipknot: TSlipknot
+  Left = 304
+  Height = 600
+  Top = 145
+  Width = 800
+  BorderStyle = bsSingle
+  Caption = 'Slipknot'
+  Position = poMainFormCenter
+  LCLVersion = '1.4.4.0'
+end

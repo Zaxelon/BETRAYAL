@@ -7,6 +7,8 @@ object Form2: TForm2
   Caption = 'Form2'
   ClientHeight = 180
   ClientWidth = 227
+  Color = clWhite
+  OnCreate = FormCreate
   Position = poOwnerFormCenter
   LCLVersion = '1.4.4.0'
   object StringGrid1: TStringGrid
